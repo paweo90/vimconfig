@@ -19,7 +19,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-
+Plugin 'majutsushi/tagbar'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -61,7 +61,18 @@ set noexpandtab
 set number
 "youcompleteme
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_error_symbol = '>>'
+let g:ycm_warning_symbol = '>>'
+let g:ycm_enable_diagnostic_signs = 1
+let g:ycm_enable_diagnostic_highlighting = 1
+let g:ycm_echo_current_diagnostic = 1
+" Airline Setup {{{
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='badwolf'
+nnoremap <silent> <LocalLeader>F2 :bn
+" }}
+ "
 "NerdTree setup
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -72,16 +83,26 @@ syntax enable
 set background=dark
 colorscheme gruvbox
 
-"syntastic
+" Syntastic Setup {{{
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
+ 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+let g:syntastic_c_compiler = 'gcc'
+let g:syntastic_c_auto_refresh_includes = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"}}}
+
+" Tagbar Setup {{{
+nmap <F8> :TagbarToggle<CR>
+"}}}
 
 "ctags
 set tags=~/mikrokontrolery_STM/tags,tags
